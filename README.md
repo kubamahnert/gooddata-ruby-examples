@@ -1,3 +1,7 @@
+# DEPRECATION WARNING
+this repository has been deprecated in favour of [gooddata-ruby-doc](https://github.com/gooddata/gooddata-ruby-doc/). Please make all pull requests in that repository instead!
+
+
 # GoodData Ruby Cookbook
 
 Examples on how to use [gooddata-ruby](https://github.com/gooddata/gooddata-ruby). You can browse the cookbook by chapters, or see the [whole cookbook](http://sdk.gooddata.com/gooddata-ruby-examples/) deployed at sdk microsite.
