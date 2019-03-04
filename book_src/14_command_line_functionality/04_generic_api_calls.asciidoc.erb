@@ -1,0 +1,29 @@
+=== Using the Ruby SDK Command Line tool to make generic requests to GoodData API
+by Jakub Mahnert
+
+==== Problem
+You would like to make requests to any API endpoint yourself
+
+==== Preamble
+
+All of the following are bash lines, please enter them in your terminal of choice. `jq` is used in the examples to parse the JSON responses in bash.
+
+This chapter assumes that you know how to authenticate - check the <<01_intro.asciidoc,Intro>> chapter if that's not the case.
+
+==== Solution
+
+The API currently knows how to make GET, POST and DELETE requests.
+
+GET and DELETE are both straightforward:
+
+`gooddata api get /gdc/md`
+`gooddata api delete /gdc/projects/project_id`
+
+POST requires a payload, which you should save as a JSON into a file and feed it as a parameter to the CL tool:
+
+`echo '{"name": "gd_ruby_cmd_test", "type" : "etl","component": {"name": "gdc-etl-sql-executor", "version":"1"}}' > process.json`
+`gooddata api post /gdc/dataload_path/ process.json`
+
+In case the payload is empty, no parameter needs to be passed
+
+`gooddata api post /gdc/projects/project_id/execute`

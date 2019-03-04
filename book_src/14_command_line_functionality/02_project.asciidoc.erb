@@ -1,0 +1,25 @@
+=== Using the Ruby SDK Command Line tool to create projects
+by Jakub Mahnert
+
+==== Problem
+You would like to create a GoodData project and use it to do great things
+
+==== Preamble
+
+All of the following are bash lines, please enter them in your terminal of choice. `jq` is used in the examples to parse the JSON responses in bash.
+
+This chapter assumes that you know how to authenticate - check the <<01_intro.asciidoc,Intro>> chapter if that's not the case. To create a project, you have to have an Authorization (Project) token as a part of the authentication data.
+
+==== Solution
+
+Creating a project is as simple as
+
+`gooddata project create`
+
+You can easily chain multiple calls to the gooddata command line tool using `bash` and `jq`
+
+`gooddata api get $(gooddata project create | jq -r '.project.links.projectFeatureFlags') | jq`
+
+
+
+

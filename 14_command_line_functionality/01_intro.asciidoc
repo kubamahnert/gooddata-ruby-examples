@@ -1,0 +1,29 @@
+=== Leveraging the Ruby SDK Command Line functionality
+by Jakub Mahnert
+
+==== Problem
+You would like to make a simple request to the GoodData API
+
+
+==== Preamble
+
+All of the following are bash lines, please enter them in your terminal of choice. `jq` is used in the examples to parse the JSON responses in bash.
+
+==== Solution
+
+There are two principal ways to authenticate - either pass the credentials and server settings with each call as command line parameters:
+
+`gooddata -U username -P password -s https://custom-domain.gooddata.com api get /gdc/md`
+
+Notice how the named parameters are between `gooddata` and the command `api get`
+
+A complete list of the available command line parameters are available by running `gooddata --help`
+
+The other way to authenticate is to run the authentication wizard, which will store your credentials and server settings at `~/.gooddata`
+
+`gooddata auth store`
+
+After storing your credentials, making requests is as easy as
+
+`gooddata api get /gdc/md`
+

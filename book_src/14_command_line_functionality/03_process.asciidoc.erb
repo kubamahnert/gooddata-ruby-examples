@@ -1,0 +1,37 @@
+=== Using the Ruby SDK Command Line tool to deploy processes
+by Jakub Mahnert
+
+==== Problem
+You would like to deploy an ETL or Ruby process in your GoodData workspace
+
+==== Preamble
+
+All of the following are bash lines, please enter them in your terminal of choice. `jq` is used in the examples to parse the JSON responses in bash.
+
+This chapter assumes that you know how to authenticate - check the <<01_intro.asciidoc,Intro>> chapter if that's not the case.
+
+To deploy a process, you need a GoodData project id.
+
+==== Solution
+
+There are three ways to deploy a process. The first way is to deploy a script that has been uploaded to your webdav directory by passing the script path. This works for Ruby scripts as well as CloudConnect graphs.
+
+`gooddata -p project_id process create from_path ./path/to/script | jq`
+
+The second way is to use a deploy string, which refers to an object in the GoodData gerrit repository. For example, this is how you would deploy the latest release brick.
+
+`gooddata -p project_id process create from_path '${PUBLIC_APPSTORE}:tag/3.5.0:/apps/release_brick'`
+
+The third (and most optimal) way is to deploy GoodData Components. The Components are a part of the platform and are managed by GoodData teams, ensuring better cohesion and code quality than custom ETL or LCM scripts.
+
+For example, this is how you would deploy an ETL SQL executor. You'll have to construct the JSON payload yourself, store it in a file and pass it to the Ruby SDK CL tool, as the components often require additional parameters (see their specific documentation for more info).
+
+`echo '{"name": "gd_ruby_cmd_test", "type" : "etl","component": {"name": "gdc-etl-sql-executor", "version":"1"}}' > process.json`
+`gooddata -p project_id process create as_component process.json`
+
+
+
+
+
+
+
